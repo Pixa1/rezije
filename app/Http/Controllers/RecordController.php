@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Record;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use DB;
 
 class RecordController extends Controller
 {
@@ -15,9 +17,17 @@ class RecordController extends Controller
     public function index()
     {
         //
-        $records = Record::all();
+        $result = Record::select(DB::raw('YEAR(Date) as year'))->distinct()->orderBy('year','desc')->get();
+        $years = $result->pluck('year');
+/*         $years = Record::distinct()
+            ->get(function ($val) {
+                return Carbon::parse($val->Date)->year;
+        }); */
+        //dd($years);
+
+        $records = Record::whereYear('Date','2019')->get();
         //dd($records);
-        return view('home')->with('records',$records);
+        return view('home')->with(compact('records','years'));
     }
 
     /**
