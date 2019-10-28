@@ -1,22 +1,26 @@
 SELECT 
-	@vk_m3 := round(g2.vk-g1.vk,2) as vk_m3, 
-    @vp_m3 := round(g2.vp-g1.vp,2) as vp_m3,
-    @vo_m3 := @vk_m3-@vp_m3 as vo_m3,
-    @vb_m3 := round(@vo_m3/3/3,2) as vb_m3,
-    @vpt_m3 := @vb_m3 + @vp_m3 as vpt_m3,
-    
-    @vjt_m3 := @vo_m3/3 + @vb_m3 as vjt_m3,
+	@VK_m3 := round(g2.VK-g1.VK,2) as VK_m3, 
+    @VP_m3 := round(g2.VP-g1.VP,2) as VP_m3,
+    @vo_m3 := @VK_m3-@VP_m3 as vo_m3,
+    @VB_m3 := round(@vo_m3/3/3,2) as VB_m3,
+    @VPt_m3 := @VB_m3 + @VP_m3 as VPt_m3,
+    voda,voda_o2,voda_o3,
+    @vjt_m3 := @vo_m3/3 + @VB_m3 as vjt_m3,
 
-	round(((@vk_m3 * voda_o2 + voda*3) * (1 + 13/100) + (voda_o3 * @vk_m3)),2) AS vk_kn,
-    round(((@vpt_m3 * voda_o2 + voda) * (1 + 13/100) + (voda_o3 * @vpt_m3)),2) AS vp_kn,
-    round(((@vjt_m3 * voda_o2 + voda) * (1 + 13/100) + (voda_o3 * @vjt_m3)),2) AS vjt_kn
+	round(((@VK_m3 * voda_o2 + voda) * (1 + 13/100) + (voda_o3 * @VK_m3)),2) AS VK_kn,
+    round(((@VPt_m3 * voda_o2 + voda/3) * (1 + 13/100) + (voda_o3 * @VPt_m3)),2) AS VP_kn,
+    round(((@vjt_m3 * voda_o2 + voda/3) * (1 + 13/100) + (voda_o3 * @vjt_m3)),2) AS vjt_kn,
+    
+    @SK_KW := round(g2.SK-g1.SK,2) as SK_KW,
+    @SP_KW := round(g2.SP-g1.SP,2) as SP_KW,
+    @SJ_KW := round(g2.SJ-g1.SJ,2) as SJ_KW,
+    @ST_KW := round(g2.ST-g1.ST,2) as ST_KW,
+    @SB_KW := round(@SK_KW - @SP_KW - @SJ_KW - @ST_KW,2) as SB_KW,
+    
+    @SK_KW * struja as SK_KN
     
     FROM 
-	
     records g1
         INNER JOIN
     records g2 ON g2.id = g1.id + 1
-JOIN rezije.configurables
-
-
-
+JOIN configurables
