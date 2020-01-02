@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+        <a class="navbar-brand" href="index.html">Spoljarci</a>
     </div>
     <!-- /.navbar-header -->
 
@@ -17,7 +17,7 @@
         <!-- /.dropdown -->
 
         <!-- /.dropdown -->
-        <li class="dropdown">
+{{--         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
@@ -31,7 +31,7 @@
                 </li>
             </ul>
             <!-- /.dropdown-user -->
-        </li>
+        </li> --}}
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
@@ -39,17 +39,19 @@
     <div class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
-
                 <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Režije</a>
+                    <a href="/create"><i class="fa fa-edit fa-fw"></i>  Novi zapis<span class="fa arrow"></span></a> 
                 </li>
+{{--                 <li>
+                    <a href="/"><i class="fa fa-dashboard fa-fw"></i> Režije</a>
+                </li> --}}
                 
                     @foreach ($years as $year)
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{$year}}<span class="fa arrow"></span></a> 
+                        <a href="/year/{{$year}}"><i class="fa fa-bar-chart-o fa-fw"></i> {{$year}}<span class="fa arrow"></span></a> 
                     </li>
                     @endforeach
-                    
+
 
                     <!-- /.nav-second-level -->
 

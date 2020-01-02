@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Record extends Model
+class Total extends Model
 {
     //
     public $timestamps = false;
-    //protected $hidden = ['id'];
+    protected $hidden = ['id'];
     protected $dates = [
         'date',
     ];
