@@ -39,7 +39,6 @@
         <!-- /.dropdown -->
 
         <!-- /.dropdown -->
-
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
