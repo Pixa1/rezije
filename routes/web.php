@@ -15,4 +15,15 @@
     return view('home');
 }); */
 
+
 Route::get('/','RecordController@index');
+Route::get('/create','RecordController@create');
+Route::get('/year/{id}','RecordController@show');
+Route::get('/all','RecordController@all');
+Route::post('/store','RecordController@store');
+
+Route::resource('ajax', 'AjaxController');
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'RecordController@index')->name('home');

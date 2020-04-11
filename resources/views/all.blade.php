@@ -3,9 +3,36 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-    <h1 class="page-header">Režije {{$year}}</h1>
+    <h1 class="page-header">Režije</h1>
     </div>
     <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Pojedinačno
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                    <canvas id="myChart2" ></canvas>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Ukupno
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                {{-- <div id="area-example"></div> --}}
+                <canvas id="myChart" ></canvas>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
 </div>
 <div class="row">
   <div class="col-lg-6">
@@ -28,7 +55,7 @@
                       <tbody>
                         @foreach ($records as $record)
                         <tr>
-                          <td>{{ucfirst($record->date->monthName)}}</td>
+                          <td>{{ucfirst($record->date->format('m.Y'))}}</td>
                           <td>{{$record->Bero}} Kn</td>
                           <td>{{$record->Jura}} Kn</td>
                           <td>{{$record->Pixa}} Kn</td>
@@ -46,7 +73,7 @@
   <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-          Ukupno 
+          Ukupno
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -63,7 +90,7 @@
                     <tbody>
                       @foreach ($records as $record)
                       <tr>
-                        <td>{{ucfirst($record->date->monthName)}}</td>
+                        <td>{{ucfirst($record->date->format('m.Y'))}}</td>
                         <td>{{$record->Struja}} Kn</td>
                         <td>{{$record->Voda}} Kn</td>
                         <td>{{$record->Komunal}} Kn</td>
@@ -80,33 +107,7 @@
 </div>
 <!-- /.row -->
 </div>
-<div class="row">
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Pojedinačno
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
-                        <canvas id="myChart2" ></canvas>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-        </div>
-        <div class="col-lg-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Ukupno
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                        {{-- <div id="area-example"></div> --}}
-                        <canvas id="myChart" ></canvas>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-            </div>
-</div>
+
 @section('scripts')
 <script>
     var data = @json($graphdata);
@@ -123,7 +124,7 @@
                     labelString: 'Kn'
                 }
                 }]
-            }   
+            }
         }
     });
     var data2=@json($graphdata2);
@@ -139,10 +140,10 @@
                     labelString: 'Kn'
                 }
                 }]
-            }   
+            }
         }
     });
-        
+
         </script>
 @endsection
 @endsection

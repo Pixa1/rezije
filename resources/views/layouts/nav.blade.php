@@ -6,32 +6,40 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+        <a class="navbar-brand" href="/">Spoljarci</a>
     </div>
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-top-links navbar-right">
-
-        <!-- /.dropdown -->
-
-        <!-- /.dropdown -->
-
-        <!-- /.dropdown -->
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+        @auth
+        <li class="nav-item dropdown">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                {{ Auth::user()->name }} <span class="caret"></span>
             </a>
-            <ul class="dropdown-menu dropdown-user">
-                <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                </li>
-                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                </li>
-                <li class="divider"></li>
-                <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                </li>
-            </ul>
-            <!-- /.dropdown-user -->
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+            </div>
         </li>
+        @else
+
+        <li><a href="{{route('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        @endauth
+        <!-- /.dropdown -->
+
+        <!-- /.dropdown -->
+
+        <!-- /.dropdown -->
+
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
@@ -40,17 +48,18 @@
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
 
-                <li>
-                    <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Režije</a>
-                </li>
-                
+                    <li>
+                        <a href="/create"><i class="fa fa-edit fa-fw"></i> Novi zapis<span class="fa arrow"></span></a> 
+                    </li>
                     @foreach ($years as $year)
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> {{$year}}<span class="fa arrow"></span></a> 
+                        <a href="/year/{{$year}}"><i class="fa fa-bar-chart-o fa-fw"></i> {{$year}}<span class="fa arrow"></span></a> 
                     </li>
                     @endforeach
-                    
 
+                   <li>
+                        <a href="/all"><i class="fa fa-bar-chart-o fa-fw"></i>  All<span class="fa arrow"></span></a>
+                    </li>
                     <!-- /.nav-second-level -->
 
             </ul>
